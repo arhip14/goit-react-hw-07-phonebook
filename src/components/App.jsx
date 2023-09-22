@@ -11,7 +11,6 @@ import { fetchContacts } from '../Redux/actions/contactsActions';
 const App = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
-  const isLoading = useSelector((state) => state.contacts.isLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -23,8 +22,7 @@ const App = () => {
       <ContactForm />
       <Filter />
       <ContactListContainer>
-        {isLoading && <p>Loading...</p>}
-        {contacts.length > 0 ? (
+        {contacts && contacts.length > 0 ? (
           <ContactList />
         ) : (
           <NoContactsMessage>No contacts to display.</NoContactsMessage>

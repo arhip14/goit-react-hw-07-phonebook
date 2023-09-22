@@ -7,7 +7,6 @@ import { FormContainer } from './ContactFormStyled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .matches(/^[a-zA-Zа-яА-Я\s'-]*$/, 'Invalid name format')
