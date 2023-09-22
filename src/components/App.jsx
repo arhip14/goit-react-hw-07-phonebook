@@ -10,7 +10,7 @@ import { fetchContacts } from '../Redux/actions/contactsActions';
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.items);
+  const contacts = useSelector((state) => state.contacts.items) || [];
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -22,11 +22,11 @@ const App = () => {
       <ContactForm />
       <Filter />
       <ContactListContainer>
-      {contacts && contacts.length > 0 ? (
-        <ContactList />
-      ) : (
-        <NoContactsMessage>No contacts to display.</NoContactsMessage>
-      )}
+        {contacts.length > 0 ? (
+          <ContactList />
+        ) : (
+          <NoContactsMessage>No contacts to display.</NoContactsMessage>
+        )}
       </ContactListContainer>
       <ToastContainer autoClose={3000} position={toast.POSITION.TOP_CENTER} />
     </AppContainer>
