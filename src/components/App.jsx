@@ -1,5 +1,6 @@
+// Компонент App.jsx
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
@@ -16,9 +17,8 @@ const App = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  if (!contacts) {
-    return <div>Loading...</div>; 
-  }
+  // Перевірте, чи contacts є масивом перед використанням його довжини
+  const isContactsArray = Array.isArray(contacts);
 
   return (
     <AppContainer>
@@ -26,7 +26,11 @@ const App = () => {
       <ContactForm />
       <Filter />
       <ContactListContainer>
-        {contacts.length > 0 ? <ContactList /> : <div>No contacts found.</div>}
+        {isContactsArray && contacts.length > 0 ? (
+          <ContactList />
+        ) : (
+          <div>No contacts found.</div>
+        )}
       </ContactListContainer>
       <ToastContainer autoClose={3000} position={toast.POSITION.TOP_CENTER} />
     </AppContainer>
@@ -34,8 +38,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-
