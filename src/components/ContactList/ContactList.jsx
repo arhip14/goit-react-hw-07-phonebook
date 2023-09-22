@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../Redux/actions/contactsActions';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact, fetchContacts } from '../../Redux/actions/contactsActions';
 import {
   ContactListContainer,
   ContactListItem,
@@ -11,16 +11,26 @@ import {
 } from './ContactList.styles';
 
 const ContactList = () => {
-  const contacts = useSelector((state) => state.contacts.contacts);
-  const filter = useSelector((state) => state.contacts.filter);
   const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts.items);
+  const filter = useSelector((state) => state.contacts.filter);
 
   const filteredContacts = contacts.filter((contact) =>
-    contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id));
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const handleDelete = (contactId) => {
+    dispatch(deleteContact(contactId))
+      .then(() => {
+        dispatch(fetchContacts());
+      })
+      .catch((error) => {
+        console.error('Error deleting contact:', error);
+      });
   };
 
   return (
@@ -29,7 +39,7 @@ const ContactList = () => {
         {filteredContacts.map((contact) => (
           <ContactListItem key={contact.id}>
             <ContactInfo>
-              <ContactName>{contact.name}</ContactName>
+              <ContactName>{contact.name}:</ContactName>
               <ContactNumber>{contact.number}</ContactNumber>
             </ContactInfo>
             <DeleteButton onClick={() => handleDelete(contact.id)}>Delete</DeleteButton>

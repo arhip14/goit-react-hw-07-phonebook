@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../Redux/actions/contactsActions';
+import { setFilter } from '../../Redux/actions/contactsActions';
 import { FilterContainer } from './Filter.styles';
 
 const Filter = () => {
@@ -13,7 +13,7 @@ const Filter = () => {
   };
 
   return (
-    <FilterContainer> 
+    <FilterContainer>
       <label>Filter contacts by name:</label>
       <input
         type="text"

@@ -1,5 +1,18 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import * as contactApi from '../../components/contactApi';
 
-export const addContact = createAction('contacts/addContact');
-export const deleteContact = createAction('contacts/deleteContact');
-export const setFilter = createAction('contacts/setFilter');
+export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
+  return contactApi.fetchContacts();
+});
+
+export const addContact = createAsyncThunk('contacts/addContact', async (contact) => {
+  return contactApi.addContact(contact);
+});
+
+export const deleteContact = createAsyncThunk('contacts/deleteContact', async (contactId) => {
+  return contactApi.deleteContact(contactId);
+})
+  export const setFilter = (filter) => ({
+  type: 'contacts/setFilter',
+  payload: filter,
+});
