@@ -11,6 +11,7 @@ import { fetchContacts } from '../Redux/actions/contactsActions';
 const App = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items) || [];
+  const isEmpty = contacts.length === 0; // Додано перевірку на пустий масив
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -22,11 +23,11 @@ const App = () => {
       <ContactForm />
       <Filter />
       <ContactListContainer>
-        {/* {contacts.length > 0 ? (
-          <ContactList />
-        ) : (
+        {isEmpty ? (
           <NoContactsMessage>No contacts to display.</NoContactsMessage>
-        )} */}
+        ) : (
+          <ContactList />
+        )}
       </ContactListContainer>
       <ToastContainer autoClose={3000} position={toast.POSITION.TOP_CENTER} />
     </AppContainer>
