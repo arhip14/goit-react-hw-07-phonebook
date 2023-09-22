@@ -22,11 +22,11 @@ const App = () => {
       <ContactForm />
       <Filter />
       <ContactListContainer>
-        {contacts && contacts.length > 0 ? (
-          <ContactList />
-        ) : (
-          <NoContactsMessage>No contacts to display.</NoContactsMessage>
-        )}
+      {contacts && contacts.length > 0 ? (
+        <ContactList />
+      ) : (
+        <NoContactsMessage>No contacts to display.</NoContactsMessage>
+      )}
       </ContactListContainer>
       <ToastContainer autoClose={3000} position={toast.POSITION.TOP_CENTER} />
     </AppContainer>
