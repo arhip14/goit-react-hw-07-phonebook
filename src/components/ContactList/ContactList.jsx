@@ -17,7 +17,7 @@ const ContactList = () => {
 
   const filteredContacts = contacts.filter((contact) => {
     if (typeof contact.name === 'string' && typeof filter === 'string') {
-      return contact.name.toLowerCase().includes(filter.toLowerCase());
+      return contact.name.includes(filter);
     }
     return false;
   });
