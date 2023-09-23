@@ -1,4 +1,3 @@
-// Компонент App.jsx
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from './ContactForm/ContactForm';
@@ -16,8 +15,6 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  // Перевірте, чи contacts є масивом перед використанням його довжини
   const isContactsArray = Array.isArray(contacts);
 
   return (

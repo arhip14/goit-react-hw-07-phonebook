@@ -49,9 +49,10 @@ export const ContactListContainer = styled.div`
 
 export const NoContactsMessage = styled.p`
   font-size: 18px;
-  color: #666;
   text-align: center;
   margin-top: 20px;
+  color: red; 
+  font-weight: bold; 
 `;
 
 export const ContactListHeader = styled.h2`
@@ -109,3 +110,4 @@ export const DeleteButton = styled.button`
     background-color: #c0392b;
   }
 `;
+
