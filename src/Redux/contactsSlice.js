@@ -17,7 +17,7 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (c
 });
 
 const initialState = {
-  items: [], 
+  items: [],
   isLoading: false,
   error: null,
   filter: "",
