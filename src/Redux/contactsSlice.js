@@ -6,6 +6,7 @@ export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async ()
   return contacts;
 });
 
+
 export const addContact = createAsyncThunk('contacts/addContact', async (contact) => {
   const newContact = await contactApi.addContact(contact);
   return newContact;
@@ -20,7 +21,7 @@ const initialState = {
   items: [],
   isLoading: false,
   error: null,
-  filter: "",
+  filter: '', 
 };
 
 const contactsSlice = createSlice({
