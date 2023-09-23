@@ -13,7 +13,13 @@ import {
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
+  const isLoading = useSelector((state) => state.contacts.isLoading);
+  const error = useSelector((state) => state.contacts.error);
   const filter = useSelector((state) => state.contacts.filter);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filteredContacts = contacts.filter((contact) => {
     if (typeof contact.name === 'string' && typeof filter === 'string') {
@@ -21,10 +27,6 @@ const ContactList = () => {
     }
     return false;
   });
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   const handleDelete = (contactId) => {
     dispatch(deleteContact(contactId))
@@ -35,6 +37,14 @@ const ContactList = () => {
         console.error('Error deleting contact:', error);
       });
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
   return (
     <ContactListContainer>

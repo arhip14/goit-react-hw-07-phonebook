@@ -18,10 +18,12 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (c
 });
 
 const initialState = {
-  items: [],
-  isLoading: false,
-  error: null,
-  filter: '', 
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  filter: "",
 };
 
 const contactsSlice = createSlice({
